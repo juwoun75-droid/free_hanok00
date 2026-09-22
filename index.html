@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>안국동 무료 한옥 길잡이 | Bukchon Free Hanok Guide</title>
+  <meta name="description" content="안국동·북촌 일대의 무료 관람 및 체험이 가능한 대표 한옥 4곳(북촌한옥청, 계동배렴가옥, 북촌 한옥마을, 갤러리한옥)의 지도와 특징, 탐방 팁을 제공하는 길잡이 미니 앱입니다.">
+  <meta name="keywords" content="안국동 한옥, 북촌 무료 한옥, 북촌한옥청, 계동배렴가옥, 북촌 한옥마을, 갤러리한옥, 서울 무료 여행, 한옥 지도">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="안국동 무료 한옥 길잡이">
+  <meta property="og:description" content="안국동·북촌에서 무료로 체험할 수 있는 아름다운 한옥 4곳을 지도에서 한눈에 확인하세요.">
+  <meta property="og:type" content="website">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- '내가 만든 안국동 무료 한옥 길잡이' 첫 화면 (Landing Screen) -->
+  <section id="landingScreen" class="landing-screen" aria-label="안국동 무료 한옥 길잡이 시작 화면">
+    <div class="landing-backdrop-pattern"></div>
+    <div class="landing-container">
+      <!-- 상단 엠블럼 태그 -->
+      <div class="landing-top-badge">
+        <span class="badge-dot"></span>
+        <span>서울 북촌 · 계동 · 가회동 도보 여행 길잡이</span>
+      </div>
+
+      <!-- 타이틀 -->
+      <div class="landing-title-group">
+        <span class="landing-author-badge">내가 만든</span>
+        <h1 class="landing-main-title">안국동 무료 한옥 길잡이</h1>
+        <p class="landing-subtitle">
+          입장료 없이 무료로 누리는 도심 속 고즈넉한 한옥 4곳과<br>
+          골목길 사이사이에 숨은 소소한 재밋거리, 생생한 방문담을 만나보세요.
+        </p>
+      </div>
+
+      <!-- 핵심 빨간색 한옥 아이콘 (클릭 시 지도 열기) -->
+      <div class="landing-action-center">
+        <button id="openMapBtn" class="landing-hanok-btn" title="빨간 아이콘을 눌러 지도 열기" aria-label="안국동 한옥 지도 열기">
+          <div class="hanok-btn-pulse pulse-1"></div>
+          <div class="hanok-btn-pulse pulse-2"></div>
+          <div class="hanok-btn-inner">
+            <svg viewBox="0 0 64 64" fill="currentColor">
+              <path d="M32 6 C28 6 22 9 8 13 C5 14 3 17 6 18 C11 19 20 20 32 20 C44 20 53 19 58 18 C61 17 59 14 56 13 C42 9 36 6 32 6 Z" />
+              <path d="M4 17 C12 21 21 23 32 23 C43 23 52 21 60 17 C62 16 63 19 61 21 C53 27 43 29 32 29 C21 29 11 27 3 21 C1 19 2 16 4 17 Z" opacity="0.9" />
+              <rect x="14" y="27" width="36" height="4" rx="1.5" />
+              <rect x="15" y="31" width="4" height="21" rx="1" />
+              <rect x="25" y="31" width="3.5" height="21" rx="1" />
+              <rect x="35.5" y="31" width="3.5" height="21" rx="1" />
+              <rect x="45" y="31" width="4" height="21" rx="1" />
+              <path d="M20 35 H24 V49 H20 Z M30 35 H34 V49 H30 Z M40 35 H44 V49 H40 Z" opacity="0.4" />
+              <path d="M10 52 H54 L52 58 H12 Z" />
+            </svg>
+          </div>
+          <div class="hanok-btn-label">
+            <span>빨간 아이콘을 눌러 지도 열기</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </button>
+      </div>
+
+      <!-- 4곳 한옥 미리보기 카드 리스트 -->
+      <div class="landing-preview-grid">
+        <div class="preview-item">
+          <span class="preview-num">01</span>
+          <div class="preview-info">
+            <strong>북촌한옥청</strong>
+            <span>공공 한옥 & 북촌 전망 마루</span>
+          </div>
+        </div>
+        <div class="preview-item">
+          <span class="preview-num">02</span>
+          <div class="preview-info">
+            <strong>계동배렴가옥</strong>
+            <span>등록문화재 화가의 고즈넉한 집</span>
+          </div>
+        </div>
+        <div class="preview-item">
+          <span class="preview-num">03</span>
+          <div class="preview-info">
+            <strong>북촌 한옥마을</strong>
+            <span>계동길과 전통 기와 골목길</span>
+          </div>
+        </div>
+        <div class="preview-item">
+          <span class="preview-num">04</span>
+          <div class="preview-info">
+            <strong>갤러리한옥</strong>
+            <span>한옥 속 이색 현대미술 전시</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 하단 안내 피처 태그 -->
+      <div class="landing-footer-features">
+        <span>📍 4곳 위치 & 무료 관람 특징</span>
+        <span>•</span>
+        <span>🧭 가는 길 소소한 재밋거리</span>
+        <span>•</span>
+        <span>💬 방문자 경험담 나누기</span>
+        <span>•</span>
+        <span>🚶 추천 도보 코스</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 메인 앱 (지도 및 상세 패널) -->
+  <div id="app">
+    <!-- 상단 헤더 -->
+    <header class="app-header">
+      <div class="header-brand" id="brandTitle" title="첫 화면으로 돌아가기" style="cursor: pointer;">
+        <div class="brand-icon-wrapper">
+          <svg viewBox="0 0 64 64" fill="currentColor">
+            <path d="M32 6 C28 6 22 9 8 13 C5 14 3 17 6 18 C11 19 20 20 32 20 C44 20 53 19 58 18 C61 17 59 14 56 13 C42 9 36 6 32 6 Z" />
+            <path d="M4 17 C12 21 21 23 32 23 C43 23 52 21 60 17 C62 16 63 19 61 21 C53 27 43 29 32 29 C21 29 11 27 3 21 C1 19 2 16 4 17 Z" opacity="0.9"/>
+            <rect x="15" y="31" width="4" height="21" rx="1" />
+            <rect x="25" y="31" width="3.5" height="21" rx="1" />
+            <rect x="35.5" y="31" width="3.5" height="21" rx="1" />
+            <rect x="45" y="31" width="4" height="21" rx="1" />
+            <path d="M10 52 H54 L52 58 H12 Z" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>
+            내가 만든 안국동 무료 한옥 길잡이
+            <span class="brand-badge">무료 4선</span>
+          </h1>
+          <p>북촌 · 계동 · 가회동 도보 탐방 지도</p>
+        </div>
+      </div>
+
+      <!-- 헤더 보조 컨트롤 액션 -->
+      <div class="header-actions">
+        <button class="header-btn" id="homeBtn" title="첫 화면(홈)으로 이동">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>처음으로</span>
+        </button>
+        <button class="header-btn" id="toggleTrailBtn" title="추천 도보 코스 표시">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 4v16M17 8l-4-4-4 4M13 20l4-4M9 16l4 4"/>
+          </svg>
+          <span>추천 코스</span>
+        </button>
+        <button class="header-btn" id="resetViewBtn" title="전체 한옥 한눈에 보기">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+            <path d="M2 12h20"></path>
+          </svg>
+          <span>전체보기</span>
+        </button>
+        <button class="header-btn" id="myLocationBtn" title="현재 내 위치 찾기">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+          </svg>
+          <span>내 위치</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 상단 퀵 필터 칩 바 -->
+    <nav class="quick-chips-wrapper" id="quickChips" aria-label="한옥 바로가기">
+      <!-- data.js 기반 동적 렌더링 -->
+    </nav>
+
+    <!-- 메인 지도 -->
+    <main id="map" role="application" aria-label="안국동 한옥 지도"></main>
+
+    <!-- 하단 추천 도보 코스 배너 -->
+    <div class="tour-banner" id="tourBanner">
+      <div class="tour-banner-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="5" r="2"></circle>
+          <path d="M10 22v-5l-2-2.5 1.5-3.5 3 2 3-2 1.5 3.5-2 2.5v5"></path>
+        </svg>
+      </div>
+      <div class="tour-banner-content">
+        <h4>북촌 무료 한옥 순환 산책 코스</h4>
+        <p>안국역 3번 출구 → 계동길 → 배렴가옥 → 북촌한옥청 → 갤러리한옥 (약 1.8km, 30분)</p>
+      </div>
+      <button class="tour-toggle-btn" id="bannerTrailBtn">코스 선 보기</button>
+    </div>
+
+    <!-- 상세 정보 슬라이딩 패널 (데스크톱: 사이드바, 모바일: 바텀시트) -->
+    <aside class="detail-panel" id="detailPanel" aria-labelledby="panelName">
+      <!-- 상단 대표 사진 영역 -->
+      <div class="detail-header-image">
+        <img id="panelImage" src="" alt="한옥 전경">
+        <div class="image-overlay-gradient"></div>
+        <button class="close-panel-btn" id="closePanelBtn" aria-label="닫기">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="image-badge-tag">
+          <span class="badge-free">무료 관람</span>
+          <span class="badge-category" id="panelBadgeCategory">공공 한옥</span>
+        </div>
+      </div>
+
+      <!-- 탭 내비게이션 -->
+      <nav class="detail-tabs" aria-label="상세 정보 탭">
+        <button class="detail-tab-btn active" data-tab="info">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>한옥 안내</span>
+        </button>
+        <button class="detail-tab-btn" data-tab="fun">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+          </svg>
+          <span>가는 길 재밋거리</span>
+        </button>
+        <button class="detail-tab-btn" data-tab="stories">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span>경험담 & 꿀팁</span>
+          <span class="story-count-badge" id="storyCountBadge">2</span>
+        </button>
+      </nav>
+
+      <!-- 본문 스크롤 영역 -->
+      <div class="detail-body">
+        <!-- 1. 한옥 기본 정보 탭 -->
+        <div class="tab-pane active" id="pane-info">
+          <!-- 타이틀 섹션 -->
+          <div class="place-title-section">
+            <span class="place-hanja" id="panelHanja">北村韓屋廳</span>
+            <h2 class="place-name" id="panelName">북촌한옥청</h2>
+          </div>
+
+          <!-- 주소 섹션 (원클릭 복사) -->
+          <div class="address-card">
+            <div class="address-text-group">
+              <span class="address-label">위치 및 주소</span>
+              <span class="address-value" id="panelAddress">서울특별시 종로구 북촌로12길 29-1</span>
+            </div>
+            <button class="copy-btn" id="copyAddressBtn" title="주소 복사">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>복사</span>
+            </button>
+          </div>
+
+          <!-- 핵심 특징 설명 (사용자 요청 본문) -->
+          <div class="feature-highlight-box">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l2.4 7.2h7.6l-6.2 4.5 2.4 7.3-6.2-4.5-6.2 4.5 2.4-7.3-6.2-4.5h7.6z"/>
+              </svg>
+              이곳의 특별한 특징
+            </h3>
+            <p id="panelFeature">서울시가 매입해 조성한 공공 한옥으로, 전통 한옥 내부 공간을 무료로 관람할 수 있으며 다양한 전시와 문화 행사가 열리는 곳입니다.</p>
+          </div>
+
+          <!-- 세부 매력 포인트 리스트 -->
+          <div class="key-points-section">
+            <h4>관람 포인트 & 이모저모</h4>
+            <ul class="points-list" id="panelDetailsList">
+              <!-- 동적 삽입 -->
+            </ul>
+          </div>
+
+          <!-- 운영 정보 메타 그리드 -->
+          <div class="info-meta-grid">
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <div class="meta-text">
+                <strong>관람 시간:</strong>
+                <span id="panelHours">화~일 10:00 - 18:00 (월요일 휴관)</span>
+              </div>
+            </div>
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <div class="meta-text">
+                <strong>문의처:</strong>
+                <span id="panelPhone">02-2133-1371</span>
+              </div>
+            </div>
+            <div class="meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <div class="meta-text">
+                <strong>방문 팁:</strong>
+                <span id="panelTip">한옥 마루에서 감상하는 북촌 전경이 일품입니다.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 가는 길 소소한 재밋거리 탭 -->
+        <div class="tab-pane" id="pane-fun">
+          <div class="fun-intro-card">
+            <div class="fun-intro-badge">골목 산책 발견기</div>
+            <h3>가는 길에 만나는 소소한 즐거움</h3>
+            <p>한옥으로 향하는 돌담길과 좁은 골목 사이사이에 숨겨진 정겨운 풍경과 재미난 포인트들을 찾아보세요.</p>
+          </div>
+
+          <div class="fun-spots-list" id="panelFunList">
+            <!-- data.js 기반 동적 렌더링 -->
+          </div>
+
+          <div class="fun-walk-tip">
+            <div class="tip-icon">🏮</div>
+            <div class="tip-body">
+              <strong>골목 탐방 추천 에티켓</strong>
+              <p>주민들이 거주하는 마을 골목인 만큼 조용히 걸으며, 작은 골목 모퉁이마다 피어난 꽃들과 옛 기와의 결을 눈에 담아보세요.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. 방문자 경험담 & 꿀팁 탭 -->
+        <div class="tab-pane" id="pane-stories">
+          <div class="stories-intro-box">
+            <div class="stories-intro-header">
+              <h3>한옥 체험 경험담 & 꿀팁</h3>
+              <span class="stories-badge">함께 만드는 길잡이</span>
+            </div>
+            <p>다녀오신 후 느낀 특별한 감동이나, 가는 길에 알게 된 소소한 꿀팁을 이웃 여행자들과 나눠보세요.</p>
+          </div>
+
+          <!-- 경험담 작성 폼 -->
+          <form class="story-write-card" id="storyForm">
+            <div class="form-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+              <span>나만의 한옥 이야기 남기기</span>
+            </div>
+            <div class="form-row-author">
+              <input type="text" id="storyAuthor" placeholder="닉네임 (예: 계동나들이)" maxlength="12" required>
+              <select id="storyTag">
+                <option value="🌿 고즈넉한 쉼">🌿 고즈넉한 쉼</option>
+                <option value="📸 인생샷 명소">📸 인생샷 명소</option>
+                <option value="🚶 골목 꿀팁">🚶 골목 꿀팁</option>
+                <option value="🎨 예술과 공간">🎨 예술과 공간</option>
+                <option value="💡 관람 팁">💡 관람 팁</option>
+                <option value="☕ 소소한 즐거움">☕ 소소한 즐거움</option>
+              </select>
+            </div>
+            <textarea id="storyContent" placeholder="한옥을 둘러보며 느낀 점이나 가는 길에 발견한 소소한 재밋거리를 자유롭게 들려주세요 (최소 10자)" minlength="10" maxlength="300" required></textarea>
+            <div class="form-footer">
+              <span class="char-count" id="charCount">0/300자</span>
+              <button type="submit" class="submit-story-btn">
+                <span>경험담 등록</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </div>
+          </form>
+
+          <!-- 경험담 목록 -->
+          <div class="stories-feed" id="storiesFeed">
+            <!-- 동적 삽입 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 하단 길찾기 및 외부 링크 버튼 그룹 -->
+      <div class="detail-footer">
+        <div class="action-row-maps">
+          <a id="linkNaver" class="map-link-btn naver" href="#" target="_blank" rel="noopener noreferrer">
+            <span>네이버 지도</span>
+          </a>
+          <a id="linkKakao" class="map-link-btn kakao" href="#" target="_blank" rel="noopener noreferrer">
+            <span>카카오 맵</span>
+          </a>
+          <a id="linkGoogle" class="map-link-btn google" href="#" target="_blank" rel="noopener noreferrer">
+            <span>구글 지도</span>
+          </a>
+        </div>
+        <a id="linkOfficial" class="official-link-btn" href="#" target="_blank" rel="noopener noreferrer">
+          <span>상세 정보 바로가기</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- 토스트 알림 컨테이너 -->
+    <div class="toast-notice" id="toastNotice"></div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <!-- 데이터 및 앱 스크립트 -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

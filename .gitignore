@@ -1,0 +1,9 @@
+# 시스템 및 임시 파일
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE 및 에디터
+.vscode/
+.idea/
+.agents/

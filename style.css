@@ -1,0 +1,1672 @@
+/* ==========================================================================
+   안국동 무료 한옥 길잡이 (Anguk Hanok Guide) 스타일시트
+   단청(Dan-cheong) 레드와 먹색, 한지 미학을 담은 모던 프리미엄 디자인
+   ========================================================================== */
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+  /* 색상 팔레트 */
+  --color-dancheong-red: #C92A2A;
+  --color-dancheong-red-light: #FF6B6B;
+  --color-dancheong-red-dark: #A61E1E;
+  --color-dancheong-red-soft: rgba(201, 42, 42, 0.08);
+  --color-roof-charcoal: #1C1E21;
+  --color-roof-slate: #2E3440;
+  --color-hanji-bg: #FAF8F5;
+  --color-hanji-card: #FFFFFF;
+  --color-wood-warm: #8D5B4C;
+  --color-gold-accent: #D4AF37;
+  --color-pine-green: #2B580C;
+  --color-border: #EADBCC;
+  --color-text-main: #1F2421;
+  --color-text-sub: #5C646D;
+  --color-text-muted: #8C96A3;
+
+  /* 글꼴 */
+  --font-serif: 'Noto Serif KR', 'Nanum Myeongjo', serif;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-en: 'Outfit', sans-serif;
+
+  /* 여백 및 곡률 */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* 그림자 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.14);
+  --shadow-red-glow: 0 0 24px rgba(201, 42, 42, 0.35);
+
+  /* 전환 효과 */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 리셋 & 기본 세팅 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  color: var(--color-text-main);
+  background-color: var(--color-hanji-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 앱 전체 컨테이너 */
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   헤더 (Header)
+   ========================================================================== */
+.app-header {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.header-brand {
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(234, 219, 204, 0.8);
+  border-radius: var(--radius-lg);
+  padding: 10px 20px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: var(--transition-smooth);
+}
+
+.header-brand:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+
+.brand-icon-wrapper {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--color-dancheong-red), var(--color-dancheong-red-dark));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(201, 42, 42, 0.3);
+}
+
+.brand-icon-wrapper svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.brand-text h1 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-roof-charcoal);
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.brand-badge {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  background-color: var(--color-dancheong-red);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0;
+}
+
+.brand-text p {
+  font-size: 0.76rem;
+  color: var(--color-text-sub);
+  margin-top: 2px;
+}
+
+.header-actions {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-btn {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(234, 219, 204, 0.8);
+  border-radius: var(--radius-full);
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-roof-charcoal);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-fast);
+}
+
+.header-btn:hover {
+  background: #ffffff;
+  color: var(--color-dancheong-red);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.header-btn.active {
+  background: var(--color-dancheong-red);
+  color: #ffffff;
+  border-color: var(--color-dancheong-red);
+}
+
+.header-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ==========================================================================
+   지도 상단 칩 네비게이션 (Quick Hanok Filter Chips)
+   ========================================================================== */
+.quick-chips-wrapper {
+  position: absolute;
+  top: 76px;
+  left: 16px;
+  right: 16px;
+  z-index: 990;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  pointer-events: none;
+  scrollbar-width: none;
+}
+
+.quick-chips-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.chip-btn {
+  pointer-events: auto;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(234, 219, 204, 0.9);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+
+.chip-btn:hover {
+  background: #ffffff;
+  border-color: var(--color-dancheong-red);
+  color: var(--color-dancheong-red);
+}
+
+.chip-btn.active {
+  background: var(--color-roof-charcoal);
+  color: #ffffff;
+  border-color: var(--color-roof-charcoal);
+  box-shadow: var(--shadow-md);
+}
+
+.chip-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-dancheong-red);
+}
+
+.chip-btn.active .chip-indicator {
+  background-color: var(--color-gold-accent);
+}
+
+/* ==========================================================================
+   지도 컨테이너 (Leaflet Map)
+   ========================================================================== */
+#map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Leaflet 컨트롤 커스텀 */
+.leaflet-top.leaflet-left {
+  top: 130px;
+  left: 16px;
+}
+
+.leaflet-control-zoom {
+  border: none !important;
+  box-shadow: var(--shadow-md) !important;
+  border-radius: var(--radius-md) !important;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom a {
+  background: rgba(255, 255, 255, 0.94) !important;
+  color: var(--color-roof-charcoal) !important;
+  font-size: 16px !important;
+  line-height: 32px !important;
+  border-bottom: 1px solid #eee !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #fff !important;
+  color: var(--color-dancheong-red) !important;
+}
+
+/* ==========================================================================
+   빨간색 한옥 마커 (Red Hanok Custom Marker)
+   ========================================================================== */
+.hanok-marker-pin {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hanok-marker-pin:hover {
+  transform: translateY(-6px) scale(1.1);
+  z-index: 9999 !important;
+}
+
+.hanok-marker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hanok-badge-bubble {
+  position: relative;
+  background: linear-gradient(135deg, #E03131, #C92A2A);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-family: var(--font-serif);
+  font-size: 0.76rem;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(201, 42, 42, 0.45);
+  border: 1.5px solid #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hanok-badge-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #C92A2A;
+}
+
+.hanok-icon-body {
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  border-radius: 50%;
+  border: 3px solid var(--color-dancheong-red);
+  box-shadow: var(--shadow-md), 0 0 0 4px rgba(201, 42, 42, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+  position: relative;
+}
+
+.hanok-icon-body svg {
+  width: 26px;
+  height: 26px;
+  fill: var(--color-dancheong-red);
+}
+
+.hanok-marker-pulse {
+  position: absolute;
+  bottom: -4px;
+  width: 14px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+/* 선택된 마커 상태 */
+.hanok-marker-pin.is-active {
+  transform: translateY(-8px) scale(1.15);
+  z-index: 9999 !important;
+}
+
+.hanok-marker-pin.is-active .hanok-icon-body {
+  background: var(--color-dancheong-red);
+  border-color: #ffffff;
+  box-shadow: var(--shadow-lg), 0 0 0 6px rgba(201, 42, 42, 0.4);
+}
+
+.hanok-marker-pin.is-active .hanok-icon-body svg {
+  fill: #ffffff;
+}
+
+.hanok-marker-pin.is-active .hanok-badge-bubble {
+  background: linear-gradient(135deg, var(--color-roof-charcoal), #2b2b2b);
+  border-color: var(--color-gold-accent);
+}
+
+.hanok-marker-pin.is-active .hanok-badge-bubble::after {
+  border-top-color: var(--color-roof-charcoal);
+}
+
+/* 안국역 마커 */
+.station-marker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.95;
+}
+
+.station-badge {
+  background: #FF7043;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: 1.5px solid #fff;
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   상세 정보 사이드 패널 / 바텀시트 (Detail Modal & Sheet)
+   ========================================================================== */
+.detail-panel {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  bottom: 16px;
+  width: 420px;
+  max-width: calc(100vw - 32px);
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(234, 219, 204, 0.9);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateX(110%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.detail-panel.open {
+  transform: translateX(0);
+}
+
+.detail-header-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background-color: #e5e5e5;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.detail-header-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.detail-header-image:hover img {
+  transform: scale(1.05);
+}
+
+.image-overlay-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 40%, rgba(0,0,0,0.6) 100%);
+}
+
+.close-panel-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-roof-charcoal);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+
+.close-panel-btn:hover {
+  background: #fff;
+  color: var(--color-dancheong-red);
+  transform: rotate(90deg);
+}
+
+.image-badge-tag {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  display: flex;
+  gap: 6px;
+}
+
+.badge-free {
+  background: var(--color-dancheong-red);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.badge-category {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+/* 스크롤 본문 */
+.detail-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.place-title-section {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 16px;
+}
+
+.place-hanja {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  letter-spacing: 1px;
+}
+
+.place-name {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--color-roof-charcoal);
+  margin-top: 2px;
+  letter-spacing: -0.5px;
+}
+
+/* 주소 섹션 */
+.address-card {
+  background: var(--color-hanji-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.address-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.address-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-wood-warm);
+}
+
+.address-value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-roof-charcoal);
+}
+
+.copy-btn {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  transition: var(--transition-fast);
+}
+
+.copy-btn:hover {
+  background: var(--color-dancheong-red);
+  color: #ffffff;
+  border-color: var(--color-dancheong-red);
+}
+
+/* 특징 강조 섹션 */
+.feature-highlight-box {
+  background: linear-gradient(135deg, rgba(201, 42, 42, 0.05), rgba(212, 175, 55, 0.08));
+  border-left: 4px solid var(--color-dancheong-red);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 14px 16px;
+}
+
+.feature-highlight-box h3 {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--color-dancheong-red-dark);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.feature-highlight-box p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #2D3142;
+  word-break: keep-all;
+}
+
+/* 세부 포인트 리스트 */
+.key-points-section h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-roof-slate);
+  margin-bottom: 10px;
+}
+
+.points-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.points-list li {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-text-sub);
+  position: relative;
+  padding-left: 16px;
+}
+
+.points-list li::before {
+  content: '•';
+  position: absolute;
+  left: 4px;
+  color: var(--color-dancheong-red);
+  font-weight: bold;
+}
+
+/* 운영 정보 그리드 */
+.info-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  background: #FAF7F2;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.82rem;
+}
+
+.meta-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-wood-warm);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.meta-text strong {
+  color: var(--color-roof-charcoal);
+  margin-right: 4px;
+}
+
+/* 하단 액션 버튼 그룹 (길찾기 및 공식 링크) */
+.detail-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 16px 24px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.action-row-maps {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.map-link-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid var(--color-border);
+  background: #fafafa;
+  color: var(--color-text-main);
+  transition: var(--transition-fast);
+}
+
+.map-link-btn:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.map-link-btn.naver {
+  color: #03C75A;
+  border-color: rgba(3, 199, 90, 0.3);
+}
+
+.map-link-btn.kakao {
+  color: #3C1E1E;
+  background: #FEE500;
+  border-color: #FEE500;
+}
+
+.map-link-btn.google {
+  color: #4285F4;
+  border-color: rgba(66, 133, 244, 0.3);
+}
+
+.official-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  background: var(--color-roof-charcoal);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: var(--transition-fast);
+}
+
+.official-link-btn:hover {
+  background: var(--color-dancheong-red);
+}
+
+/* ==========================================================================
+   하단 추천 코스 안내 바 (Walking Tour Banner)
+   ========================================================================== */
+.tour-banner {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 950;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(234, 219, 204, 0.9);
+  border-radius: var(--radius-lg);
+  padding: 12px 18px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 480px;
+  transition: var(--transition-smooth);
+}
+
+.tour-banner-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--color-dancheong-red-soft);
+  color: var(--color-dancheong-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tour-banner-content h4 {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--color-roof-charcoal);
+}
+
+.tour-banner-content p {
+  font-size: 0.76rem;
+  color: var(--color-text-sub);
+  margin-top: 2px;
+}
+
+.tour-toggle-btn {
+  background: var(--color-dancheong-red);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition-fast);
+}
+
+.tour-toggle-btn:hover {
+  background: var(--color-dancheong-red-dark);
+}
+
+/* 토스트 알림 (Toast Notification) */
+.toast-notice {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(50px);
+  background: rgba(30, 32, 34, 0.95);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast-notice.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   상세 패널 탭 내비게이션 (Tabs Navigation)
+   ========================================================================== */
+.detail-tabs {
+  display: flex;
+  background: #FAF8F5;
+  border-bottom: 1px solid var(--color-border);
+  padding: 4px 16px 0;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.detail-tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 10px 4px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-sub);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.detail-tab-btn:hover {
+  color: var(--color-dancheong-red);
+}
+
+.detail-tab-btn.active {
+  color: var(--color-dancheong-red);
+  border-bottom-color: var(--color-dancheong-red);
+  font-weight: 800;
+}
+
+.story-count-badge {
+  background: var(--color-dancheong-red-soft);
+  color: var(--color-dancheong-red);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+}
+
+.detail-tab-btn.active .story-count-badge {
+  background: var(--color-dancheong-red);
+  color: #ffffff;
+}
+
+/* 탭 본문 페인 */
+.tab-pane {
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+  animation: tabFadeIn 0.28s ease-out;
+}
+
+.tab-pane.active {
+  display: flex;
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   가는 길 소소한 재밋거리 (Fun Alley Spots)
+   ========================================================================== */
+.fun-intro-card {
+  background: linear-gradient(135deg, #FFFDF9 0%, #F5EFE6 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+
+.fun-intro-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-wood-warm);
+  background: rgba(141, 91, 76, 0.1);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  margin-bottom: 6px;
+}
+
+.fun-intro-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-roof-charcoal);
+  margin-bottom: 4px;
+}
+
+.fun-intro-card p {
+  font-size: 0.82rem;
+  color: var(--color-text-sub);
+  line-height: 1.5;
+}
+
+.fun-spots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fun-spot-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+
+.fun-spot-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-dancheong-red);
+  box-shadow: var(--shadow-md);
+}
+
+.fun-spot-icon {
+  font-size: 1.5rem;
+  width: 42px;
+  height: 42px;
+  background: #FAF8F5;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(234, 219, 204, 0.8);
+}
+
+.fun-spot-text h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-roof-charcoal);
+  margin-bottom: 4px;
+}
+
+.fun-spot-text p {
+  font-size: 0.82rem;
+  color: var(--color-text-sub);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.fun-walk-tip {
+  background: #FAF5F0;
+  border: 1px dashed var(--color-wood-warm);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.tip-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.tip-body strong {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--color-wood-warm);
+  margin-bottom: 2px;
+}
+
+.tip-body p {
+  font-size: 0.78rem;
+  color: #555;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+/* ==========================================================================
+   방문자 경험담 & 꿀팁 나누기 (Stories & Community)
+   ========================================================================== */
+.stories-intro-box {
+  background: linear-gradient(135deg, rgba(201, 42, 42, 0.04), rgba(212, 175, 55, 0.06));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+
+.stories-intro-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.stories-intro-header h3 {
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--color-roof-charcoal);
+}
+
+.stories-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color-dancheong-red);
+  background: #fff;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(201, 42, 42, 0.3);
+}
+
+.stories-intro-box p {
+  font-size: 0.8rem;
+  color: var(--color-text-sub);
+  line-height: 1.45;
+}
+
+/* 작성 폼 */
+.story-write-card {
+  background: #ffffff;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--color-roof-charcoal);
+}
+
+.form-row-author {
+  display: flex;
+  gap: 8px;
+}
+
+.story-write-card input,
+.story-write-card select,
+.story-write-card textarea {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: #FAF8F5;
+  color: var(--color-text-main);
+  padding: 8px 10px;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.story-write-card input:focus,
+.story-write-card select:focus,
+.story-write-card textarea:focus {
+  background: #ffffff;
+  border-color: var(--color-dancheong-red);
+  box-shadow: 0 0 0 3px rgba(201, 42, 42, 0.1);
+}
+
+.story-write-card input {
+  flex: 1;
+}
+
+.story-write-card select {
+  font-weight: 600;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.story-write-card textarea {
+  width: 100%;
+  height: 80px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.char-count {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.submit-story-btn {
+  background: var(--color-dancheong-red);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.submit-story-btn:hover {
+  background: var(--color-dancheong-red-dark);
+  box-shadow: 0 4px 10px rgba(201, 42, 42, 0.3);
+}
+
+/* 피드 목록 */
+.stories-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.story-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.story-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.story-author-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.author-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-wood-warm), var(--color-dancheong-red));
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.author-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-roof-charcoal);
+}
+
+.story-date {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+.story-tag-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-wood-warm);
+  background: #FAF4EE;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+}
+
+.story-content-text {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #2D3142;
+  word-break: keep-all;
+  white-space: pre-line;
+}
+
+.story-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-top: 1px solid #FAF5F0;
+  padding-top: 8px;
+}
+
+.story-like-btn {
+  background: #FAF8F5;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-sub);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.story-like-btn:hover {
+  background: #FFF0F0;
+  border-color: #FFC9C9;
+  color: var(--color-dancheong-red);
+}
+
+.story-like-btn.liked {
+  background: #FFF0F0;
+  border-color: var(--color-dancheong-red);
+  color: var(--color-dancheong-red);
+  font-weight: 700;
+}
+
+.story-like-btn svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.story-like-btn.liked svg {
+  fill: var(--color-dancheong-red);
+  transform: scale(1.15);
+}
+
+/* ==========================================================================
+   '내가 만든 안국동 무료 한옥 길잡이' 첫 화면 (Landing Screen)
+   ========================================================================== */
+.landing-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #FAF8F5;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(201, 42, 42, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  overflow-y: auto;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.05);
+}
+
+.landing-backdrop-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: 32px 32px;
+  background-image: linear-gradient(to right, rgba(234, 219, 204, 0.35) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(234, 219, 204, 0.35) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+}
+
+.landing-container {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 22px;
+  margin: auto;
+}
+
+.landing-top-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--color-border);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-roof-charcoal);
+  box-shadow: var(--shadow-sm);
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-dancheong-red);
+}
+
+.landing-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-author-badge {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-dancheong-red);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.landing-main-title {
+  font-family: var(--font-serif);
+  font-size: 2.3rem;
+  font-weight: 900;
+  color: var(--color-roof-charcoal);
+  letter-spacing: -1px;
+  line-height: 1.25;
+}
+
+.landing-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-sub);
+  line-height: 1.6;
+  margin-top: 10px;
+  word-break: keep-all;
+}
+
+/* 중앙 빨간색 한옥 버튼 */
+.landing-action-center {
+  margin: 10px 0 6px;
+  display: flex;
+  justify-content: center;
+}
+
+.landing-hanok-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  padding: 10px;
+  outline: none;
+}
+
+.hanok-btn-inner {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF4D4D 0%, #C92A2A 100%);
+  border: 3.5px solid #ffffff;
+  box-shadow: 0 12px 32px rgba(201, 42, 42, 0.42), 0 0 0 6px rgba(201, 42, 42, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+.hanok-btn-inner svg {
+  width: 52px;
+  height: 52px;
+}
+
+.landing-hanok-btn:hover .hanok-btn-inner {
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 16px 40px rgba(201, 42, 42, 0.55), 0 0 0 8px rgba(201, 42, 42, 0.25);
+}
+
+.landing-hanok-btn:active .hanok-btn-inner {
+  transform: scale(0.96);
+}
+
+/* 펄스 링 애니메이션 */
+.hanok-btn-pulse {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: rgba(201, 42, 42, 0.35);
+  z-index: 1;
+  pointer-events: none;
+  animation: hanokPulseRing 2.4s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.hanok-btn-pulse.pulse-2 {
+  animation-delay: 1.2s;
+}
+
+@keyframes hanokPulseRing {
+  0% {
+    transform: translateX(-50%) scale(0.95);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(-50%) scale(1.7);
+    opacity: 0;
+  }
+}
+
+.hanok-btn-label {
+  background: #ffffff;
+  border: 1.5px solid var(--color-dancheong-red);
+  color: var(--color-dancheong-red);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(201, 42, 42, 0.15);
+  transition: var(--transition-fast);
+}
+
+.landing-hanok-btn:hover .hanok-btn-label {
+  background: var(--color-dancheong-red);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(201, 42, 42, 0.28);
+}
+
+/* 4곳 한옥 미리보기 그리드 */
+.landing-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.preview-item {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+
+.preview-item:hover {
+  background: #ffffff;
+  border-color: var(--color-dancheong-red);
+  transform: translateY(-2px);
+}
+
+.preview-num {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: var(--color-dancheong-red);
+  background: var(--color-dancheong-red-soft);
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.preview-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-info strong {
+  font-size: 0.85rem;
+  color: var(--color-roof-charcoal);
+}
+
+.preview-info span {
+  font-size: 0.72rem;
+  color: var(--color-text-sub);
+}
+
+/* 하단 안내 피처 태그 */
+.landing-footer-features {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   모바일 반응형 (Responsive for Mobile)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .landing-main-title {
+    font-size: 1.85rem;
+  }
+
+  .landing-subtitle {
+    font-size: 0.86rem;
+  }
+
+  .landing-preview-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .hanok-btn-inner {
+    width: 82px;
+    height: 82px;
+  }
+
+  .hanok-btn-inner svg {
+    width: 46px;
+    height: 46px;
+  }
+
+  .hanok-btn-label {
+    font-size: 0.88rem;
+    padding: 8px 18px;
+  }
+  .app-header {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .header-brand {
+    padding: 8px 14px;
+  }
+
+  .brand-text h1 {
+    font-size: 1rem;
+  }
+
+  .brand-text p {
+    display: none;
+  }
+
+  .quick-chips-wrapper {
+    top: 64px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .tour-banner {
+    left: 10px;
+    right: 10px;
+    bottom: 12px;
+    max-width: none;
+  }
+
+  .detail-panel {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 24px 24px 0 0;
+    transform: translateY(105%);
+  }
+
+  .detail-panel.open {
+    transform: translateY(0);
+  }
+
+  .leaflet-top.leaflet-left {
+    top: 110px;
+    left: 10px;
+  }
+}
