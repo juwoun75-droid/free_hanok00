@@ -68,10 +68,10 @@ function initMap() {
     zoomControl: true
   });
 
-  // 깔끔하고 세련된 한글 라벨 지원 타일레이어 (CartoDB Voyager)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://carto.com/">CARTO</a> | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    subdomains: 'abcd',
+  // 대한민국 공식 공간정보 국토교통부 브이월드(VWorld) 고해상도 한글 지도
+  L.tileLayer('https://xdworld.vworld.kr/2d/Base/service/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.vworld.kr" target="_blank" rel="noopener noreferrer">국토교통부 VWorld</a>',
+    minZoom: 6,
     maxZoom: 19
   }).addTo(map);
 
@@ -118,11 +118,11 @@ function renderQuickChips() {
 }
 
 /**
- * 빨간색 한옥 커스텀 마커 생성
+ * 시골쥐 캐릭터 커스텀 마커 생성
  */
 function renderMarkers() {
   HANOK_DATA.forEach((item, index) => {
-    // 커스텀 HTML 마커 요소 생성
+    // 시골쥐 캐릭터 커스텀 HTML 마커 요소 생성
     const customIcon = L.divIcon({
       className: 'hanok-custom-leaflet-icon',
       html: `
@@ -131,15 +131,15 @@ function renderMarkers() {
             <div class="hanok-badge-bubble">
               <span>${item.name}</span>
             </div>
-            <div class="hanok-icon-body">
-              ${HANOK_SVG_ICON}
+            <div class="hanok-icon-body character-marker-avatar">
+              <img src="character.png" alt="${item.name} 시골쥐 마커" class="marker-character-img">
             </div>
             <div class="hanok-marker-pulse"></div>
           </div>
         </div>
       `,
-      iconSize: [80, 72],
-      iconAnchor: [40, 68]
+      iconSize: [86, 80],
+      iconAnchor: [43, 76]
     });
 
     const marker = L.marker([item.lat, item.lng], {
@@ -719,7 +719,7 @@ function setupEventListeners() {
   const homeBtn = document.getElementById('homeBtn');
   const brandTitle = document.getElementById('brandTitle');
 
-  function openMap() {
+  function openMap(targetId = null) {
     if (landingScreen) {
       landingScreen.classList.add('hidden');
     }
@@ -727,8 +727,16 @@ function setupEventListeners() {
       if (map) {
         map.invalidateSize();
       }
-    }, 350);
-    showToast('안국동 무료 한옥 지도가 열렸습니다! 🗺️');
+      if (targetId) {
+        selectHanok(targetId);
+      }
+    }, 200);
+    setTimeout(() => {
+      if (map) {
+        map.invalidateSize();
+      }
+    }, 450);
+    showToast('시골쥐와 함께하는 안국동 한옥 지도가 열렸습니다! 🗺️');
   }
 
   function showLanding() {
@@ -739,8 +747,19 @@ function setupEventListeners() {
   }
 
   if (openMapBtn) {
-    openMapBtn.addEventListener('click', openMap);
+    openMapBtn.addEventListener('click', () => openMap());
   }
+
+  // 4곳 한옥 미리보기 카드 클릭 시 바로 해당 한옥으로 이동
+  const previewCards = document.querySelectorAll('.preview-item');
+  const hanokIds = ['bukchon-cheong', 'baeryeom-house', 'bukchon-village', 'gallery-hanok'];
+  previewCards.forEach((card, idx) => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+      const targetId = hanokIds[idx];
+      openMap(targetId);
+    });
+  });
 
   if (homeBtn) {
     homeBtn.addEventListener('click', showLanding);
